@@ -1,0 +1,3 @@
+rootProject.name = 'Rapp'
+
+include ':app'
