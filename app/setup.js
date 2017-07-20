@@ -1,19 +1,31 @@
 /**
- * Rapp
- * runrun
+ * RunRun Rapp
+ * https://github.com/wangshuaifeng/Rapp.git
  */
-import {AppRegistry, NetInfo, Platform} from 'react-native';
 
+import {AppRegistry, NetInfo, Platform} from 'react-native';
+import compareVersions from 'compare-versions';
+import coordtransform from 'coordtransform';
+
+import {VERSION} from './config';
 import logger from './logger';
-import store, {persistStore} from './redux/store/store';
+import store, {persistStore} from './store';
 import App from './App';
-import * as actions from './redux/actions';
+import * as actions from './actions';
 
 persistStore(
   store,
   state => {
     store.dispatch(actions.setPersistRehydrated(true));
     logger.debug('load state ok');
+
+    let version = state.store ? state.store.version : undefined;
+    if (version === undefined || compareVersions(version, VERSION) < 0) {
+      store.dispatch(actions.reset());
+      store.dispatch(actions.setStoreVersion(VERSION));
+    }
+    store.dispatch(actions.resetScreenLastRefreshTime());
+    logger.debug('check store version ok');
 
     if (Platform.OS !== 'ios') {
       NetInfo.isConnected.fetch().then(isConnected =>
@@ -50,6 +62,27 @@ persistStore(
       }
     );
     logger.debug('listen network ok');
+
+    let getPositionSuccess = position => {
+      if (position) {
+        let gcj02 = coordtransform.wgs84togcj02(
+          position.coords.longitude, position.coords.latitude);
+        position.coords.longitude = gcj02[0];
+        position.coords.latitude = gcj02[1];
+      }
+      store.dispatch(actions.setLocationPosition(position));
+    };
+    let getPositionError = error => logger.debug(error);
+    let getPositionOptions = {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 600000
+    };
+    navigator.geolocation.getCurrentPosition(
+      getPositionSuccess, getPositionError, getPositionOptions);
+    navigator.geolocation.watchPosition(
+      getPositionSuccess, getPositionError, getPositionOptions);
+    logger.debug('listen location ok');
   },
   error => {
     logger.warn('load state fail', error);

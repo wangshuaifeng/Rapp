@@ -1,14 +1,12 @@
 /**
- * Rapp
- * runrun
+ * RunRun Rapp
+ * https://github.com/wangshuaifeng/Rapp.git
  */
 
 import {Dimensions} from 'react-native';
 
-export const DEBUG = __DEV__ ; // eslint-disable-line no-undef
-
-export const IN_DEBUGGER = DEBUG && !!window.navigator.userAgent;
-
+export const DEBUG = __DEV__; // eslint-disable-line no-undef
+export const IN_DEBUGGER = DEBUG && !!window.navigator.userAgent; // 判断是不是开发模式，后者查看浏览器的类型版本
 export const VERSION = '1.1.0';
 
 let {width, height} = Dimensions.get('window');

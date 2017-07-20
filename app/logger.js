@@ -1,6 +1,6 @@
 /**
- * Rapp
- * runrun
+ * RunRun Rapp
+ * https://github.com/wangshuaifeng/Rapp.git
  */
 
 import {DEBUG} from './config';
@@ -21,7 +21,7 @@ export class Logger {
 
   info (...args) {
     if (this.level === 'debug' || this.level === 'info') {
-      console.info(this.time(), ...args);;
+      console.info(this.time(), ...args);
     }
   }
 
@@ -36,7 +36,7 @@ export class Logger {
   }
 
   time () {
-    let d = new Date()
+    let d = new Date();
     return d.toTimeString().substring(0, 8) + '.' + d.getMilliseconds();
   }
 }

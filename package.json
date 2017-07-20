@@ -1,38 +1,45 @@
 {
   "name": "Rapp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "standard"
   },
   "dependencies": {
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.0",
+    "@expo/react-native-action-sheet": "^0.3.1",
+    "axios": "^0.16.2",
+    "compare-versions": "^3.0.1",
+    "coordtransform": "^2.1.2",
+    "geolib": "^2.0.22",
+    "path": "^0.12.7",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
-    "react-native-meteor": "^1.0.5",
-    "react-native-router-flux": "^4.0.0-beta.7",
-    "redux": "^3.7.1",
+    "react-native-animatable": "^1.2.2",
+    "react-native-gallery": "0.0.17",
+    "react-native-image-picker": "^0.26.3",
+    "react-native-vector-icons": "^4.2.0",
+    "react-native-video": "^1.0.0",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.5.2",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^4.8.2",
-    "redux-thunk": "^2.2.0"
+    "redux-persist": "^4.8.0",
+    "redux-thunk": "^2.1.0",
+    "url": "^0.11.0",
+    "validate.js": "^0.11.1"
   },
   "devDependencies": {
-    "babel-jest": "20.0.3",
-    "babel-preset-react-native": "2.1.0",
-    "eslint": "^4.2.0",
-    "eslint-config-airbnb": "^15.0.2",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^7.1.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "jest": "20.0.4",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "babel-eslint": "^7.2.3",
+    "standard": "^10.0.2"
   },
-  "jest": {
-    "preset": "react-native"
+  "standard": {
+    "ignore": [
+      "android",
+      "ios",
+      "res"
+    ],
+    "parser": "babel-eslint",
+    "globals": []
   }
 }
